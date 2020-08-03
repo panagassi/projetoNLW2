@@ -1,6 +1,8 @@
 import React from 'react';
 import './assets/styles/global.css';
-import Landing from '../src/pages/Landing';
+import Landing from './assets/pages/Landing';
+
+
 function App() {
   return (
     <Landing />
