@@ -7,6 +7,7 @@ import backIcon from '../../assets/images/icons/back.svg';
 
 interface PageHeaderProps { //definir formatos de tipagem de objetos
     title: string;
+    description?: string; // a ? diz que ela não é obrigatoria
 } 
 
 const PageHeader:React.FunctionComponent<PageHeaderProps> = (props) => { // preparando para receber atributos
@@ -20,6 +21,7 @@ const PageHeader:React.FunctionComponent<PageHeaderProps> = (props) => { // prep
             </div>
             <div className="header-content">
                 <strong>{props.title}</strong>
+                { props.description && <p>{props.description}</p>}
                 {props.children}
             </div>
 

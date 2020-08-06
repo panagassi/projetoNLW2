@@ -1,33 +1,56 @@
 import React from 'react';
 import whatsIcon from '../../assets/images/icons/whatsapp.svg';
 import './styles.css';
+import api from '../../services/api';
 
-function TeacherItem() {
+export interface Teacher {
+        id: number;
+        avatar: string;
+        bio: string;
+        cost: number;
+        name: string;
+        subject: string;
+        whatsapp: string;
+};
+
+interface TeacherItemProps{
+    teacher: Teacher;
+};
+
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+    function createNewConnection(){
+        api.post('connections', {
+            user_id : teacher.id
+        })
+    }
+
+
+
     return (
         <article className="teacher-item">
                     <header>
-                        <img src="https://avatars1.githubusercontent.com/u/54078431?s=460&u=b590d629a5a8ff04605fecb5b6d3e1cad1e53e43&v=4" alt="Guilherme Panagassi"/>
+                    <img src={teacher.avatar} alt={teacher.name} />
                         <div>
-                            <strong>Guilherme Panagassi</strong>
-                            <span>Historia</span>
+                        <strong>{teacher.name}</strong>
+                        <span>{teacher.subject}</span>
                         </div>
                     </header>
-
                     <p>
-                        Um povo que não conhece a sua história está condenado a repeti-la.
+                        {teacher.bio}
                     </p>
-
                     <footer>
                         <p>
                             Preço/hora 
                             <strong>
-                                R$ 120,00
+                                {teacher.cost}
                             </strong>
                         </p>
-                        <button type="button">
+                            <a
+                            target="blank" onClick={createNewConnection} href={`https://wa.me/${teacher.whatsapp}`}>
                             <img src={whatsIcon} alt="Whatsapp" />
                             Entre em contato
-                        </button>
+                        </a>
                     </footer>
         </article>
     )
